@@ -3,7 +3,7 @@
 \
 This implementation is adopted from the source code of [Once For All (Cai et al. 2019)](https://github.com/mit-han-lab/once-for-all)
 
-## Compund Once-for-all Networks
+## Compound Once-for-all Networks
 ![](figures/overview.png)
 
 ## Pareto-Optimality and Density Maintained
