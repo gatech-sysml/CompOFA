@@ -1,7 +1,7 @@
 # CompOFA – Compound Once-For-All Networks for Faster Multi-Platform Deployment 
 ### Accepted as a conference paper at ICLR 2021 [[OpenReview]](https://openreview.net/forum?id=IgIk8RRT-Z)
 This implementation is adopted from the source code of [Once For All (Cai et al. 2019)](https://github.com/mit-han-lab/once-for-all)
-
+\
 ## Compound Once-for-all Networks
 ![](figures/overview.png)
 
