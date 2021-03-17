@@ -10,7 +10,16 @@ This implementation is adopted from the source code of [Once For All (Cai et al.
 ![](figures/pareto_curves.png)
 
 ## Reduced Train and Search Time
-<img src="/figures/cost.png" height="214" width="428">
+|                          |  OFA      |  CompOFA       |
+|--------------------------|-----------|----------------|
+|**Train Time (GPU Hours)**|  978.3    |  **493.5**     |
+|--------------------------|-----------|----------------|
+|**Train Cost**            |  $2.4k    |   $1.2k        |
+|--------------------------|-----------|----------------|
+|**CO2 emission (lbs)**    |   277     |    128         |
+|--------------------------|-----------|----------------|
+|**Search Time**           | 4.5 hours | **75 seconds** |
+
 
 ## Outperforms OFA on Overall Average Accuracy
 ![](figures/avg_accuracy.png)
