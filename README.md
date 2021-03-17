@@ -10,7 +10,7 @@ This implementation is adopted from the source code of [Once For All (Cai et al.
 ![](figures/pareto_curves.png)
 
 ## Reduced Train and Search Time
-![](figures/cost.png)
+<img src="/figures/cost.png" height="48" width="96">
 
 ## Outperforms OFA on Overall Average Accuracy
 ![](figures/avg_accuracy.png)
