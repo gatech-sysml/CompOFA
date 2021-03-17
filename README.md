@@ -1,19 +1,6 @@
 # CompOFA – Compound Once-For-All Networks for Faster Multi-Platform Deployment 
 ### Accepted as a conference paper at ICLR 2021 [[OpenReview]](https://openreview.net/forum?id=IgIk8RRT-Z)
 
-```bibtex
-@inproceedings{compofa-iclr21,
-  author    = {Manas Sahni and Shreya Varshini and Alind Khare and
-               Alexey Tumanov},
-  title     = {{C}omp{OFA}: Compound Once-For-All Networks for Faster Multi-Platform Deployment},
-  month     = {May},
-  booktitle = {Proc. of the 9th International Conference on Learning Representations},
-  series = {ICLR '21},
-  year = {2021},
-  url       = {https://openreview.net/forum?id=IgIk8RRT-Z}
-}
-```
-
 Note: This implementation is adopted from the source code of [Once For All (Cai et al. 2019)](https://github.com/mit-han-lab/once-for-all)
 
 ## Compound Once-for-all Networks
@@ -81,3 +68,17 @@ python run_NAS.py --net=<OFA_NETWORK> --target-hardware=<TARGET_HARDWARE> --imag
 2. `'gpu'`
 3. `'cpu'`
 
+## Citation
+Please cite CompOFA if you find it useful in your work
+```bibtex
+@inproceedings{compofa-iclr21,
+  author    = {Manas Sahni and Shreya Varshini and Alind Khare and
+               Alexey Tumanov},
+  title     = {{C}omp{OFA}: Compound Once-For-All Networks for Faster Multi-Platform Deployment},
+  month     = {May},
+  booktitle = {Proc. of the 9th International Conference on Learning Representations},
+  series = {ICLR '21},
+  year = {2021},
+  url       = {https://openreview.net/forum?id=IgIk8RRT-Z}
+}
+```
