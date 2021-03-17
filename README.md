@@ -1,6 +1,20 @@
 # CompOFA – Compound Once-For-All Networks for Faster Multi-Platform Deployment 
 ### Accepted as a conference paper at ICLR 2021 [[OpenReview]](https://openreview.net/forum?id=IgIk8RRT-Z)
-This implementation is adopted from the source code of [Once For All (Cai et al. 2019)](https://github.com/mit-han-lab/once-for-all)
+
+```bibtex
+@inproceedings{compofa-iclr21,
+  author    = {Manas Sahni and Shreya Varshini and Alind Khare and
+               Alexey Tumanov},
+  title     = {{C}omp{OFA}: Compound Once-For-All Networks for Faster Multi-Platform Deployment},
+  month     = {May},
+  booktitle = {Proc. of the 9th International Conference on Learning Representations},
+  series = {ICLR '21},
+  year = {2021},
+  url       = {https://openreview.net/forum?id=IgIk8RRT-Z}
+}
+```
+
+Note: This implementation is adopted from the source code of [Once For All (Cai et al. 2019)](https://github.com/mit-han-lab/once-for-all)
 
 ## Compound Once-for-all Networks
 CompOFA is a model design space that exploits the insight of compound couplings between model dimensions of a CNN to vastly simplify the search space while maintaining Pareto optimality. The smaller space can be trained in half the time without phases, and gives equally performant and diverse model families.
