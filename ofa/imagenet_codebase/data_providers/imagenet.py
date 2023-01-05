@@ -17,10 +17,12 @@ from ofa.imagenet_codebase.data_providers.base_provider import DataProvider, MyR
 class ImagenetDataProvider(DataProvider):
     DEFAULT_PATH = None
 
-    def __init__(self, save_path=DEFAULT_PATH, train_batch_size=256, test_batch_size=512, valid_size=None, n_worker=32,
+    def __init__(self, save_path=None, train_batch_size=256, test_batch_size=512, valid_size=None, n_worker=32,
                  resize_scale=0.08, distort_color=None, image_size=224,
                  num_replicas=None, rank=None):
-        assert self.DEFAULT_PATH is None, "Set ImagenetDataProvider.DEFAULT_PATH"
+        if save_path is None:
+            save_path = ImagenetDataProvider.DEFAULT_PATH
+        assert save_path is not None, "ImageNet path is unset. Set it via command line or ImagenetDataProvider.DEFAULT_PATH"
 
         warnings.filterwarnings('ignore')
         self._save_path = save_path

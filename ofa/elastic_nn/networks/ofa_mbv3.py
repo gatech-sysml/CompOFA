@@ -211,6 +211,11 @@ class OFAMobileNetV3(MobileNetV3):
                 new_key = key.replace('bn.', 'bn.bn.')
             elif 'conv.weight' in key:
                 new_key = key.replace('conv.weight', 'conv.conv.weight')
+            elif 'matrix' in key:
+                # Fixed kernel models can ignore 'matrix' keys for kernel size transformations
+                assert self.fixed_kernel, f"The following key is expected in model dicts for both src & dst models, but is missing in dst model: {key}"
+                print(f'Ignoring elastic kernel matrix in weights dict: {key}')
+                continue
             else:
                 raise ValueError(key)
             assert new_key in model_dict, '%s' % new_key
