@@ -1,4 +1,4 @@
-# CompOFA – Compound Once-For-All Networks for Faster Multi-Platform Deployment
+# CompOFA - Compound Once-For-All Networks for Faster Multi-Platform Deployment
 # Under blind review at ICLR 2021: https://openreview.net/forum?id=IgIk8RRT-Z
 #
 # Implementation based on:
@@ -16,53 +16,56 @@ from ofa.elastic_nn.networks import OFAMobileNetV3
 from ofa.imagenet_codebase.data_providers.imagenet import ImagenetDataProvider
 from ofa.imagenet_codebase.run_manager import ImagenetRunConfig, RunManager
 
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    '-n',
-    '--net',
-    metavar='OFANET',
-    help='OFA networks')
+def parse_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-n',
+        '--net',
+        metavar='OFANET',
+        help='OFA networks')
 
-parser.add_argument(
-    '-o',
-    '--output',
-    type=str,
-    default='./results.csv',
-    help='Output File'
-)
-parser.add_argument(
-    '--imagenet_path',
-    help='The path of ImageNet',
-    type=str,
-    required=True)
-parser.add_argument(
-    '-g',
-    '--gpu',
-    help='The gpu(s) to use',
-    type=str,
-    default='all')
-parser.add_argument(
-    '-b',
-    '--batch-size',
-    help='The batch on every device for validation',
-    type=int,
-    default=768)
-parser.add_argument(
-    '-j',
-    '--workers',
-    help='Number of workers',
-    type=int,
-    default=128)
+    parser.add_argument(
+        '-o',
+        '--output',
+        type=str,
+        default='./results.csv',
+        help='Output File'
+    )
+    parser.add_argument(
+        '--imagenet_path',
+        help='The path of ImageNet',
+        type=str,
+        required=True)
+    parser.add_argument(
+        '-g',
+        '--gpu',
+        help='The gpu(s) to use',
+        type=str,
+        default='all')
+    parser.add_argument(
+        '-b',
+        '--batch-size',
+        help='The batch on every device for validation',
+        type=int,
+        default=768)
+    parser.add_argument(
+        '-j',
+        '--workers',
+        help='Number of workers',
+        type=int,
+        default=128)
 
-args = parser.parse_args()
-if args.gpu == 'all':
-    device_list = range(torch.cuda.device_count())
-    args.gpu = ','.join(str(_) for _ in device_list)
-else:
-    device_list = [int(_) for _ in args.gpu.split(',')]
-os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-args.batch_size = args.batch_size * max(len(device_list), 1)
-ImagenetDataProvider.DEFAULT_PATH = args.path
+    args = parser.parse_args()
+    if args.gpu == 'all':
+        device_list = range(torch.cuda.device_count())
+        args.gpu = ','.join(str(_) for _ in device_list)
+    else:
+        device_list = [int(_) for _ in args.gpu.split(',')]
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
+    args.batch_size = args.batch_size * max(len(device_list), 1)
+    ImagenetDataProvider.DEFAULT_PATH = args.imagenet_path
+    return args
+
 
 def extract_subnet():
     net.sample_active_subnet()
@@ -78,8 +81,14 @@ def validate(subnet, verbose=True):
 
 
 if __name__ == '__main__':
+    args = parse_args()
+
+    """
+    Setup Compound OFA MobileNet with fixed kernel & D,W=compound([2,3,4],[3,4,6])
+    If evaluating a different network, accordingly modify the net class (proxylessNAS) and/or settings (heuristic, elastic kernel)
+    """
     net = OFAMobileNetV3(
-            n_classes=1000, dropout_rate=0, width_mult_list=1.3, ks_list=[3,5,7],
+            n_classes=1000, dropout_rate=0, width_mult_list=1, ks_list=[3,5,7],
             expand_ratio_list=[3,4,6], depth_list=[2,3,4],
             compound=True, fixed_kernel=True)
     net.load_weights_from_net(torch.load(args.net, map_location='cpu')['state_dict'])

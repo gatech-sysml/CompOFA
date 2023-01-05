@@ -71,6 +71,11 @@ class MyRandomResizedCrop(transforms.RandomResizedCrop):
 
     EPOCH = 0
 
+    def __init__(self, size, scale=(0.08, 1.0), ratio=(3.0 / 4.0, 4.0 / 3.0)):
+        if not isinstance(size, int):
+            size = size[0]
+        super(MyRandomResizedCrop, self).__init__(size, scale, ratio)
+
     def __call__(self, img):
         i, j, h, w = self.get_params(img, self.scale, self.ratio)
         return F.resized_crop(

@@ -1,2 +1,5 @@
+horovod==0.19.3
+tensorboard
 torch
 torchvision
+tqdm

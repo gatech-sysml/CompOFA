@@ -3,7 +3,7 @@
 Note: This implementation is adopted from the source code of [Once For All (Cai et al. 2019)](https://github.com/mit-han-lab/once-for-all)
 
 ## Citation
-If you find the code useful for your work, please consider citing
+If you find CompOFA useful for your work, please cite it using:
 ```bibtex
 @inproceedings{compofa-iclr21,
   author = {Manas Sahni and Shreya Varshini and Alind Khare and Alexey Tumanov},
@@ -47,15 +47,19 @@ Tested with:
 - `torch` 1.3.1
 - `torchvision` 0.4.2
 - `horovod` 0.19.3 for multi-GPU training
+See requirements.txt for complete list
 
 ## Training CompOFA
+Run the below 2 commands to train CompOFA with fixed kernel sizes and the compound heuristic.
 ```
 [horovodrun -np <num_gpus> -H <node1:num_gpus>,<node2:num_gpus>...] python train_ofa_net.py --task compound --phase 1 --fixed_kernel --heuristic simple
+[horovodrun -np <num_gpus> -H <node1:num_gpus>,<node2:num_gpus>...] python train_ofa_net.py --task compound --phase 2 --fixed_kernel --heuristic simple
 ```
+All 243 subnets are trained together in both the phases, but using different training hyperparameters. Note that this is different from the progressive shrinking in OFA, where the training for different `task`s progressively grows the number of trained networks.
 
 
 ## Pretrained Models
-`./ofa/checkpoints/` directory contains pre-trained models for CompOFA-MobileNetV3 with fixed kernel and elastic kernel.
+`ofa/checkpoints/` directory contains pre-trained models for CompOFA-MobileNetV3 with fixed kernel and elastic kernel.
 
 
 ## Evaluating trained Models
